@@ -9,11 +9,9 @@
 ```http
 POST http://localhost:1337/links
 Content-Type: application/json
-Authorization: bearer SOME_VALUE_YOU_GET_FROM_ANOTHER_SERVICE
 
 {
-    "href": "https://www.hypertheory.com",
-    "description": "Best danged training available ANYWHERE!"
+  
 }
 ```
 

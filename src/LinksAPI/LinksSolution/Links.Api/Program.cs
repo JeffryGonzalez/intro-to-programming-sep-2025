@@ -3,7 +3,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-//builder.Services.AddControllers();
+builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -20,7 +20,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllers(); // Create a "phone book" of possible things this API can expect.
+// For example, when someone does a POST to "/links", create the LinksController and call the AddLink method.
+// Route Table.
 
 app.Run(); // This is where our API will be up and running, listening for requests.
 // This is basically a while(true) {...} loop that will run "forever"
