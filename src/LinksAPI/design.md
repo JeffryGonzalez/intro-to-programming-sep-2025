@@ -16,3 +16,10 @@ Authorization: bearer SOME_VALUE_YOU_GET_FROM_ANOTHER_SERVICE
     "description": "Best danged training available ANYWHERE!"
 }
 ```
+
+Here is some sample code:
+
+```typescript
+const name = 'Jeff';
+console.log(name.toUpper());
+```
