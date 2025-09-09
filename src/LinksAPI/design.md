@@ -19,8 +19,9 @@ Authorization: bearer 39378973973973
 
 
 ```http
-200 Ok
+201 Created
 Content-Type: application/json
+Location: /links/38983989839839839893
 
 {
   "id": "38983989839839839893",
@@ -31,6 +32,9 @@ Content-Type: application/json
 }
 ```
 
+GET /links/38983989839839839893
+
+
 
 Here is some sample code:
 
@@ -38,3 +42,22 @@ Here is some sample code:
 const name = 'Jeff';
 console.log(name.toUpper());
 ```
+
+Http Status Codes:
+
+
+200 - 299: This worked. 
+
+201 - Created
+
+300 - 399: Need more information or redirects.
+
+400 - 499: The user agent (the client making the request) did something wrong.
+
+401 - You need to be authenticated. We gotta know who you are.
+403 - I Know who you are and you SPECIFICALLY can't do this.
+
+404 - 
+
+500 - 599: We screwed up. SHAME! 
+
