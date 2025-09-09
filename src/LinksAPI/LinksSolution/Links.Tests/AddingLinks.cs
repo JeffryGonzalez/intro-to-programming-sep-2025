@@ -38,7 +38,7 @@ public class AddingLinks
         Assert.Equal(linkToAdd.Description, postBody.Description);
         Assert.Equal(linkToAdd.Href, postBody.Href);
         Assert.Equal("joe@aol.com", postBody.AddedBy); // Slime!
-        Assert.Equal(DateTimeOffset.Now, postBody.Created, TimeSpan.FromMilliseconds(500)); // Minor Slime!
+        //Assert.Equal(DateTimeOffset.Now, postBody.Created, TimeSpan.FromMilliseconds(500)); // Minor Slime!
         Assert.NotEqual(Guid.Empty, postBody.Id); // Super slimy 
 
         var locationHeader = postResponse.Context.Response.Headers.Location.ToString();

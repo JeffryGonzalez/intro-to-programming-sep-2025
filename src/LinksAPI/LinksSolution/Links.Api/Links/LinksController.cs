@@ -49,7 +49,7 @@ public class LinksController(IDocumentSession session) : ControllerBase
             return NotFound();
         } else
         {
-            return Ok(postId);
+            return Ok(savedLink);
         }
     }
 }
