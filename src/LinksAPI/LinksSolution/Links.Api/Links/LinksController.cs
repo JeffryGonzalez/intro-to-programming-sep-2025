@@ -1,5 +1,6 @@
 ﻿
 
+using Marten;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Links.Api.Links;
@@ -7,13 +8,22 @@ namespace Links.Api.Links;
 
 // When a POST comes in for "/links", create a instance of this class, oh Kestral Web Server
 
-public class LinksController : ControllerBase
+public class LinksController(IDocumentSession session) : ControllerBase
 {
     // "Flag - a "Marker" on this method, that the API will read and know this is where
     // POSTs to "/links" should be directed.
+
+    //private IDocumentSession session;
+
+    //public LinksController(IDocumentSession session)
+    //{
+    //    this.session = session;
+    //}
+
     [HttpPost("/links")]
     public async Task<ActionResult> AddALink(
-        [FromBody] CreateLinkRequest request)
+        [FromBody] CreateLinkRequest request
+        )
     {
         var response = new CreateLinkResponse
         {
@@ -23,6 +33,8 @@ public class LinksController : ControllerBase
             AddedBy = "joe@aol.com",
             Created = DateTimeOffset.Now
         };
+        session.Store(response);
+        await session.SaveChangesAsync(); 
         return Created($"/links/{response.Id}", response);
     }
 
@@ -30,8 +42,15 @@ public class LinksController : ControllerBase
     [HttpGet("/links/{postId:guid}")]
     public async Task<ActionResult> GetLinkById(Guid postId)
     {
-       
-        return Ok(postId);
+       var savedLink = await session.Query<CreateLinkResponse>().
+            SingleOrDefaultAsync(x => x.Id == postId);
+        if(savedLink is null)
+        {
+            return NotFound();
+        } else
+        {
+            return Ok(postId);
+        }
     }
 }
 
