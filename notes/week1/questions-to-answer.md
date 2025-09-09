@@ -1,4 +1,5 @@
 # List of Questions to Answer
 
-- .NET? .NET Core? WTH?
-- Solutions? Projects?
+- What are records? (vs. classes)
+- What are "properties" 
+

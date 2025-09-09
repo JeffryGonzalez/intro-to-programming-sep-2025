@@ -9,11 +9,28 @@
 ```http
 POST http://localhost:1337/links
 Content-Type: application/json
+Authorization: bearer 39378973973973
 
 {
-  
+  "href": "https://allstate.com",
+  "description": "Good insurance. Great Developers"
 }
 ```
+
+
+```http
+200 Ok
+Content-Type: application/json
+
+{
+  "id": "38983989839839839893",
+  "href": "https://typescriptlang.org",
+  "description": "The TypeScript Website",
+  "addedBy": "jeff@hypertheory.com",
+  "created": "some datetime"
+}
+```
+
 
 Here is some sample code:
 
