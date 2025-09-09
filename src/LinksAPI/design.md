@@ -32,7 +32,9 @@ Location: /links/38983989839839839893
 }
 ```
 
-GET /links/38983989839839839893
+```http
+GET http://localhost:1337/links/d8cc2597-16c8-4ff0-8cb3-caf22eba9339
+```
 
 
 

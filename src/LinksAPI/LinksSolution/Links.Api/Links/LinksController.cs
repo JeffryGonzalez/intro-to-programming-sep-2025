@@ -23,7 +23,15 @@ public class LinksController : ControllerBase
             AddedBy = "joe@aol.com",
             Created = DateTimeOffset.Now
         };
-        return Ok(response);
+        return Created($"/links/{response.Id}", response);
+    }
+
+    // If we get a GET request to /links/{guid} THEN create this controller and run this method, if isn't, don't bother me, just return 404
+    [HttpGet("/links/{postId:guid}")]
+    public async Task<ActionResult> GetLinkById(Guid postId)
+    {
+       
+        return Ok(postId);
     }
 }
 

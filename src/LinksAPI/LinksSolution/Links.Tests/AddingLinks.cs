@@ -1,5 +1,6 @@
 ﻿
 using Alba;
+using Links.Api.Links;
 
 namespace Links.Tests;
 public class AddingLinks
@@ -19,12 +20,38 @@ public class AddingLinks
         // this will start up (host) my API for me in this test.
         var host = await AlbaHost.For<Program>();
         // Given I post this data to this API, then this should happen.
-       await host.Scenario(api =>
+        // "Desliming"
+        var linkToAdd = new CreateLinkRequest
         {
-            api.Post.Json(new { }).ToUrl("/links");
+            Href = "https://microsoft.com",
+            Description = "Where do you want to go today?"
+        };
+       var postResponse = await host.Scenario(api =>
+        {
+            api.Post.Json(linkToAdd).ToUrl("/links");
+            api.StatusCodeShouldBe(201); // Created.
+        });
+
+        var postBody = postResponse.ReadAsJson<CreateLinkResponse>();
+
+        Assert.NotNull(postBody);
+        Assert.Equal(linkToAdd.Description, postBody.Description);
+        Assert.Equal(linkToAdd.Href, postBody.Href);
+        Assert.Equal("joe@aol.com", postBody.AddedBy); // Slime!
+        Assert.Equal(DateTimeOffset.Now, postBody.Created, TimeSpan.FromMilliseconds(500)); // Minor Slime!
+        Assert.NotEqual(Guid.Empty, postBody.Id); // Super slimy 
+
+        var locationHeader = postResponse.Context.Response.Headers.Location.ToString();
+        Assert.NotNull(locationHeader);
+        var getResponse = await host.Scenario(api =>
+        {
+            api.Get.Url(locationHeader);
             api.StatusCodeShouldBeOk();
         });
 
+        var getBody = getResponse.ReadAsJson<CreateLinkResponse>();
+        Assert.NotNull(getBody);
 
+        Assert.Equal(postBody, getBody);
     }
 }
