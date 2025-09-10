@@ -11,7 +11,7 @@ public class HaveCorrectBalance
         // WTCYWYH - WRITE THE CODE YOU WISH YOU HAD.
         // Given I have a new bank account
         var account = new BankAccount();
-
+        
         // When I ask that account for the balance
         decimal balance = account.GetBalance();
 

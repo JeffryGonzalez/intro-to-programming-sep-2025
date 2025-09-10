@@ -134,16 +134,20 @@
         "type": 3
       },
       "seed": 1267157532,
-      "version": 49,
-      "versionNonce": 2058574876,
+      "version": 50,
+      "versionNonce": 1792862756,
       "isDeleted": false,
       "boundElements": [
         {
           "id": "zy-7eFWIAf5VXuHHyzaLR",
           "type": "text"
+        },
+        {
+          "id": "qCAKZkzGVboUSB_W3NAgx",
+          "type": "arrow"
         }
       ],
-      "updated": 1757513175271,
+      "updated": 1757516285376,
       "link": null,
       "locked": false
     },
@@ -461,16 +465,20 @@
         "type": 3
       },
       "seed": 942953892,
-      "version": 130,
-      "versionNonce": 326438044,
+      "version": 131,
+      "versionNonce": 1874571556,
       "isDeleted": false,
       "boundElements": [
         {
           "type": "text",
           "id": "Bfh41gKy1fMndN-uT75Uk"
+        },
+        {
+          "id": "qCAKZkzGVboUSB_W3NAgx",
+          "type": "arrow"
         }
       ],
-      "updated": 1757514134852,
+      "updated": 1757516285376,
       "link": null,
       "locked": false
     },
@@ -1019,6 +1027,97 @@
       "updated": 1757515077450,
       "link": null,
       "locked": false
+    },
+    {
+      "id": "qCAKZkzGVboUSB_W3NAgx",
+      "type": "arrow",
+      "x": 843,
+      "y": 685,
+      "width": 140,
+      "height": 5,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aW",
+      "roundness": {
+        "type": 2
+      },
+      "seed": 642767780,
+      "version": 21,
+      "versionNonce": 461637028,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1757516285376,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -140,
+          -5
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "qUgdiuFujZkEYNSO7gs-I",
+        "focus": -0.6780691752185471,
+        "gap": 6.963477967426387
+      },
+      "endBinding": {
+        "elementId": "Dp8AfKWFgPuXPfHCGo2kh",
+        "focus": 0.4937286202964652,
+        "gap": 10
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "elbowed": false
+    },
+    {
+      "id": "mGF_pFugvq1c7rXgaGtqx",
+      "type": "text",
+      "x": 439,
+      "y": 2317,
+      "width": 457.23968505859375,
+      "height": 150,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "aX",
+      "roundness": null,
+      "seed": 1162176668,
+      "version": 126,
+      "versionNonce": 510698268,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1757516493765,
+      "link": null,
+      "locked": false,
+      "text": "\"Real Continous Integration\" \n\n    - There are no \"branches\" in source control.\n    - Every developer pushes directly to main.\n\n",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "\"Real Continous Integration\" \n\n    - There are no \"branches\" in source control.\n    - Every developer pushes directly to main.\n\n",
+      "autoResize": true,
+      "lineHeight": 1.25
     }
   ],
   "appState": {
