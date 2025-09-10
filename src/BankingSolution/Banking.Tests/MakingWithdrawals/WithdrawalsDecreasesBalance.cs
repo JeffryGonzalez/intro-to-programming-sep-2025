@@ -1,10 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using Banking.Domain;
 
 namespace Banking.Tests.MakingWithdrawals;
-internal class WithdrawalsDecreasesBalance
+public class WithdrawalsDecreasesBalance
 {
+    [Theory]
+    [InlineData(110.00)]
+    [InlineData(50)]
+
+    public void Withdrawing(decimal amountToWithdraw)
+    {
+        var account = new BankAccount();
+        var openingBalance = account.GetBalance();
+        
+        account.Withdraw(amountToWithdraw);
+
+        Assert.Equal(openingBalance -  amountToWithdraw, account.GetBalance());
+    }
 }
