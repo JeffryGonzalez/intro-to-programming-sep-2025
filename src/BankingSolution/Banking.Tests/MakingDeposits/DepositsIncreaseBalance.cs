@@ -8,7 +8,7 @@ public class DepositsIncreaseBalance
     [Theory]
     [InlineData(110.10)]
     [InlineData(0.25)]
-
+    [Trait("Category", "Unit")]
     public void MakingADeposit(decimal amountToDeposit)
     {
         // Given 

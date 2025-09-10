@@ -3,6 +3,7 @@
 using Banking.Domain;
 
 namespace Banking.Tests.NewAccounts;
+[Trait("Category", "Unit")]
 public class HaveCorrectBalance
 {
     [Fact]

@@ -3,6 +3,8 @@
 using Banking.Domain;
 
 namespace Banking.Tests.MakingWithdrawals;
+
+[Trait("Category", "Unit")]
 public class WithdrawalsDecreasesBalance
 {
     [Theory]
