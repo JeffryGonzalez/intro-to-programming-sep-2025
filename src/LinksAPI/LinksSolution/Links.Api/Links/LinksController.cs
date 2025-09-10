@@ -44,6 +44,11 @@ public class LinksController(IDocumentSession session) : ControllerBase
     {
        var savedLink = await session.Query<CreateLinkResponse>().
             SingleOrDefaultAsync(x => x.Id == postId);
+
+        //var totalNumberOflinksInTheLastWeek = await session.Query<CreateLinkResponse>()
+        //    .Where(l => l.Created < DateTimeOffset.Now.AddDays(-7))
+        //    .CountAsync();
+
         if(savedLink is null)
         {
             return NotFound();
