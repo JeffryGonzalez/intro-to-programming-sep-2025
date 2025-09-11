@@ -9,8 +9,7 @@ public class BankAccount
 {
     private decimal balance = 5000M; // Fields
     public void Deposit(TransactionAmount amountToDeposit)
-    {
-        
+    { 
         balance += amountToDeposit;
     }
 
@@ -20,12 +19,9 @@ public class BankAccount
         return balance; // "Slime" 
     }
 
-    public void Withdraw(decimal amountToWithdraw)
+    public void Withdraw(TransactionAmount amountToWithdraw)
     {
-        if (amountToWithdraw <= 0) // These are sometimes called "Guard" clauses.
-        {
-            throw new InvalidTransactionAmountException();
-        }
+       
         if (amountToWithdraw <= balance)
         {
             balance -= amountToWithdraw;

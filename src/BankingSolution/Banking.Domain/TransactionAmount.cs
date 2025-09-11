@@ -7,13 +7,16 @@ public struct TransactionAmount
 
     public TransactionAmount(decimal amount)
     {
-        if(amount <= 0)
+        if (amount <= 0)
         {
             throw new InvalidTransactionAmountException();
-        } else
-        {
-            _amount = amount;
         }
+        if (amount > 10_000M)
+        {
+            throw new TransactionAmountAboveLimitException();
+        }
+        _amount = amount;
+
     }
     // this allows an "implict" converstion from TransactionAmount to a decimal.
     // so: decimal x = t; 
