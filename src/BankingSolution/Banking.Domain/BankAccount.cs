@@ -10,6 +10,10 @@ public class BankAccount
     private decimal balance = 5000M; // Fields
     public void Deposit(decimal amountToDeposit)
     {
+        if(amountToDeposit <= 0) // These are sometimes called "Guard" clauses.
+        {
+            throw new InvalidTransactionAmountException();
+        }
         balance += amountToDeposit;
     }
 
@@ -21,7 +25,16 @@ public class BankAccount
 
     public void Withdraw(decimal amountToWithdraw)
     {
-       balance -= amountToWithdraw;
+        if (amountToWithdraw <= 0) // These are sometimes called "Guard" clauses.
+        {
+            throw new InvalidTransactionAmountException();
+        }
+        if (amountToWithdraw <= balance)
+        {
+            balance -= amountToWithdraw;
+        } else
+        {
+            throw new AccountOverdraftException();
+        }
     }
 }
-
