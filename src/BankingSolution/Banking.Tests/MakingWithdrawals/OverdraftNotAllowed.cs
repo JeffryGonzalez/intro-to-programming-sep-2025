@@ -1,5 +1,7 @@
 ﻿
 
+using Banking.Tests.TestDoubles;
+
 namespace Banking.Tests.MakingWithdrawals;
 [Trait("Category", "Unit")]
 public class OverdraftNotAllowed
@@ -8,7 +10,7 @@ public class OverdraftNotAllowed
     public void OverdraftDoesNotDecreaseYourBalance()
     {
         // Given I have an account with X balance
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
         var openingBalance = account.GetBalance();
         // When I withdraw X+1 from that account
 
@@ -30,7 +32,7 @@ public class OverdraftNotAllowed
     public void AnOverdraftExceptionIsProvided()
     {
         // Given I have an account with X balance
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
 
         var openingBalance = account.GetBalance();
 

@@ -2,6 +2,8 @@
 
 
 
+using Banking.Tests.TestDoubles;
+
 namespace Banking.Tests.MakingWithdrawals;
 
 [Trait("Category", "Unit")]
@@ -12,7 +14,7 @@ public class WithdrawalsDecreasesBalance
     [InlineData(50)]
     public void Withdrawing(decimal amountToWithdraw)
     {
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
         var openingBalance = account.GetBalance();
         
         account.Withdraw(amountToWithdraw);
@@ -23,7 +25,7 @@ public class WithdrawalsDecreasesBalance
     [Fact]
     public void MayWithdrawFullBalance()
     {
-        var account = new BankAccount();
+        var account = new BankAccount(new DummyBonusCalculator());
         var openingBalance = account.GetBalance();
 
         account.Withdraw(openingBalance);

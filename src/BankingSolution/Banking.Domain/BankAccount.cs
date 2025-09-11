@@ -5,12 +5,15 @@ namespace Banking.Domain;
 
 // An object owns some data and the transformations associated with that data.
 // Sound like a service? yep..
-public class BankAccount
+public class BankAccount(ICalculateBonusesForBankAccount bonusCalculator)
 {
     private decimal balance = 5000M; // Fields
-    public void Deposit(TransactionAmount amountToDeposit)
-    { 
-        balance += amountToDeposit;
+    public virtual void Deposit(TransactionAmount amountToDeposit)
+    {
+     
+
+       decimal bonus = bonusCalculator.GetBonusForDepositOn( balance, amountToDeposit);
+        balance += amountToDeposit + bonus;
     }
 
     public decimal GetBalance()
