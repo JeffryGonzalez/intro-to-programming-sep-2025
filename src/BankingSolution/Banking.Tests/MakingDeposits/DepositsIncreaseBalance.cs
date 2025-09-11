@@ -1,6 +1,5 @@
 ﻿
 
-using Banking.Domain;
 
 namespace Banking.Tests.MakingDeposits;
     [Trait("Category", "Unit")]

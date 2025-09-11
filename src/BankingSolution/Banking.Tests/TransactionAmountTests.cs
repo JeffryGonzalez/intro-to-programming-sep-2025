@@ -1,8 +1,5 @@
 ﻿
 
-using Banking.Domain;
-using Banking.Domain.DomainExceptions;
-
 namespace Banking.Tests;
 public class TransactionAmountTests
 {
