@@ -8,12 +8,9 @@ namespace Banking.Domain;
 public class BankAccount
 {
     private decimal balance = 5000M; // Fields
-    public void Deposit(decimal amountToDeposit)
+    public void Deposit(TransactionAmount amountToDeposit)
     {
-        if(amountToDeposit <= 0) // These are sometimes called "Guard" clauses.
-        {
-            throw new InvalidTransactionAmountException();
-        }
+        
         balance += amountToDeposit;
     }
 

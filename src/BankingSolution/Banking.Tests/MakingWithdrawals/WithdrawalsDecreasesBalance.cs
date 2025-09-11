@@ -41,5 +41,9 @@ public class WithdrawalsDecreasesBalance
         Assert.Throws<InvalidTransactionAmountException>(() => account.Withdraw(amountToDeposit));
 
         Assert.Equal(openingBalance, account.GetBalance());
+
+        
     }
 }
+
+
