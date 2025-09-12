@@ -10,7 +10,8 @@ public class CalculatorTests
         // Tests treat test classes differently than normal.
        // for EACH [Fact] or each [Theory -> InlineData] a new instance of this class will be created.
        // and the constructor will be called again.
-        calculator = new Calculator(Substitute.For<ILogger>()); // A test double, a substitute, that is DUMB. It is just so we don't get NRE.
+        calculator = new Calculator(Substitute.For<ILogger>(),
+            Substitute.For<IProvideFailureNotifications>()); // A test double, a substitute, that is DUMB. It is just so we don't get NRE.
     }
     [Fact]
     public void EmptyStringReturnsZero()

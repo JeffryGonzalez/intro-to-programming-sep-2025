@@ -1,7 +1,7 @@
 ﻿
 using StringCalculator.Helpers;
 
-public class Calculator(ILogger logger)
+public class Calculator(ILogger logger, IProvideFailureNotifications notificationApi)
 {
     public int Add(string numbers)
     {
@@ -11,8 +11,8 @@ public class Calculator(ILogger logger)
         var delimeters = new List<char> { ',', '\n' };
         if (numbers.IsEmptyString()) { return 0; }
 
-       
-       
+
+
         if (numbers.HasACustomDelimeter())
         {
             delimeters.Add(numbers[2]);
@@ -28,14 +28,22 @@ public class Calculator(ILogger logger)
         .Sum();
 
         // TODO: Write this to a logging service
-        logger.LogCalculation("tacos");
+        try
+        {
+            logger.LogCalculation(final.ToString());
+        }
+        catch (IndexOutOfRangeException)
+        {
+
+            notificationApi.NotifyOfLoggingFailure(final.ToString());
+        }
 
         return final;
     }
 
-   
 
-   
+
+
 }
 
 public class NegativeNumbersNotAllowedException : Exception
@@ -47,4 +55,9 @@ public class NegativeNumbersNotAllowedException : Exception
 public interface ILogger
 {
     void LogCalculation(string message);
+}
+
+public interface IProvideFailureNotifications
+{
+    void NotifyOfLoggingFailure(string message);
 }
