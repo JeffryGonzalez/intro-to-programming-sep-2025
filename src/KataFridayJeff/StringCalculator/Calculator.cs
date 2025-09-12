@@ -1,7 +1,7 @@
 ﻿
 using StringCalculator.Helpers;
 
-public class Calculator
+public class Calculator(ILogger logger)
 {
     public int Add(string numbers)
     {
@@ -23,9 +23,14 @@ public class Calculator
         {
             throw new NegativeNumbersNotAllowedException(string.Join(", ", results.Where(n => n < 0)));
         }
-        return results
+        var final = results
         .Where(n => n <= 1000)
         .Sum();
+
+        // TODO: Write this to a logging service
+        logger.LogCalculation("tacos");
+
+        return final;
     }
 
    
@@ -39,3 +44,7 @@ public class NegativeNumbersNotAllowedException : Exception
 }
 
 
+public interface ILogger
+{
+    void LogCalculation(string message);
+}
