@@ -1,7 +1,4 @@
 ﻿
-
-using System.Runtime.InteropServices;
-
 namespace StringCalculator;
 
 public class CalculatorTests
