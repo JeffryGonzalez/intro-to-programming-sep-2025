@@ -25,8 +25,7 @@ public class LinksController(IDocumentSession session) : ControllerBase
         [FromBody] CreateLinkRequest request
         )
     {
-        var response = new CreateLinkResponse
-        {
+        var response = new CreateLinkResponse {
             Id = Guid.NewGuid(),
             Href = request.Href,
             Description = request.Description,

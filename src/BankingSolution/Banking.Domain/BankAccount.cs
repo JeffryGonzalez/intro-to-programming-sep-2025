@@ -11,6 +11,10 @@ public class BankAccount(ICalculateBonusesForBankAccount bonusCalculator)
     public virtual void Deposit(TransactionAmount amountToDeposit)
     {
      
+        if(balance > 5000 )
+        {
+            // calculate the bonus here.
+        }
 
        decimal bonus = bonusCalculator.GetBonusForDepositOn( balance, amountToDeposit);
         balance += amountToDeposit + bonus;

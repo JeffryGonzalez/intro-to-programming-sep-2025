@@ -5,7 +5,7 @@ namespace Misc.Domain;
 // internal - just within this assembly - other types in here can use this, but not outside.
 // private* - but this is mostly for "nested" classes.
 
-public class Employee
+public class Employee : IProvideEmployeeInformation
 {
     // State and Behavior of any instances of this class.
     private decimal salary = 0;
@@ -19,6 +19,8 @@ public class Employee
     //}
     // "Auto Property"
     public string Name { get; set; } = string.Empty;
+    public string EmailAddress { get; set; } = string.Empty;
+
 
     public decimal Balance { get; private set; }
 
@@ -29,7 +31,7 @@ public class Employee
 
     public decimal GetSalary()
     {
-        
+
         return salary;
     }
 
@@ -39,7 +41,7 @@ public class Employee
     }
 
     public decimal ProjectSalaryWithIncrease(
-        decimal currentSalary, 
+        decimal currentSalary,
         decimal percentOfIncrease)
     {
         currentSalary = currentSalary * percentOfIncrease;

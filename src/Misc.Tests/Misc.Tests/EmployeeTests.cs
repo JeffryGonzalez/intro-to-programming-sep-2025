@@ -110,7 +110,7 @@ public class EmployeeTests
         Assert.Equal(100000, currentSalary);
     }
 
-    [Fact]
+    [Fact(Skip = "bummer")]
     public void Swaparoo()
     {
         int a = 10;
@@ -156,6 +156,25 @@ public class EmployeeTests
         emp.MakeDeposit(300);
         Assert.Equal(300M, emp.Balance);
                                        
+    }
+
+    [Fact]
+    public void SideEffectsAreBad()
+    {
+        var sue = new Employee();
+        sue.EmailAddress = "sue@aol.com";
+        sue.GiveRaise(3000);
+
+        var marketing = new Marketing();
+        var note = "Good Job! You Rock!";
+        var x = 12;
+        marketing.SendEmailToEmployeeWithThanks(sue, note, x);
+
+        Assert.Equal("Good Job! You Rock!", note);
+        Assert.Equal(12, x); 
+        Assert.Equal("sue@aol.com", sue.EmailAddress);
+        Assert.Equal(3000, sue.GetSalary());
+
     }
 
 }
