@@ -11,4 +11,9 @@ export const routes: Routes = [
     path: 'support',
     component: Support,
   },
+  {
+    path: 'demos',
+    loadChildren: () =>
+      import('../demos/demos.routes').then((r) => r.DEMOS_ROUTES),
+  },
 ];
