@@ -52,6 +52,9 @@ import { NavBarLink } from './nav-link';
   styles: ``,
 })
 export class Navigation {
+  demo = signal({
+    pizza: 'yummy',
+  });
   links = signal<NavLink[]>([
     {
       href: '/',
@@ -63,7 +66,12 @@ export class Navigation {
     },
     {
       href: '/links',
+
       label: 'Links',
+    },
+    {
+      href: '/support',
+      label: 'Support',
     },
   ]);
 }
