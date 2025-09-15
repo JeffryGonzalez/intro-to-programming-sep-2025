@@ -1,11 +1,12 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { NavLink } from './types';
 import { NavBarLink } from './nav-link';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NavBarLink],
+  imports: [NavBarLink, RouterLink],
   template: `
     <div class="navbar bg-base-100 shadow-sm">
       <div class="navbar-start">
@@ -35,7 +36,8 @@ import { NavBarLink } from './nav-link';
             }
           </ul>
         </div>
-        <a class="btn btn-ghost text-xl">Into to Programming</a>
+
+        <a routerLink="/" class="btn btn-ghost text-xl">Into to Programming</a>
       </div>
       <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
