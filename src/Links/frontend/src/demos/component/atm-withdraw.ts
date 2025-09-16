@@ -1,5 +1,10 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  signal,
+  computed,
+} from '@angular/core';
 
 @Component({
   selector: 'app-demos-atm-withdraw',
@@ -12,7 +17,11 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 
     <div class="flex gap-4">
       @for (amount of amounts; track $index) {
-        <button (click)="addAmount(amount)" class="btn btn-success">
+        <button
+          [disabled]="amountLeft() - amount < 0"
+          (click)="addAmount(amount)"
+          class="btn btn-success"
+        >
           {{ amount }}
         </button>
       }
@@ -20,6 +29,11 @@ import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 
     <div>
       <p>You want to withdraw: {{ plannedWithdrawal() | currency }}</p>
+    </div>
+    <div>
+      @if (plannedWithdrawal() > 0) {
+        <button (click)="reset()" class="btn btn-warning">Cancel</button>
+      }
     </div>
   `,
   styles: ``,
@@ -31,7 +45,11 @@ export class AtmWithdraw {
   balance = signal(500);
 
   plannedWithdrawal = signal(0);
+  amountLeft = computed(() => this.balance() - this.plannedWithdrawal());
 
+  reset() {
+    this.plannedWithdrawal.set(0);
+  }
   addAmount(amount: number) {
     this.plannedWithdrawal.update((oldAmount) => oldAmount + amount);
     // or
