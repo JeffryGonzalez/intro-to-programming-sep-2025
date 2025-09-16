@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  signal,
+  computed,
+} from '@angular/core';
 import { NavLink } from './types';
 import { NavBarLink } from './nav-link';
 import { RouterLink } from '@angular/router';
@@ -45,7 +50,11 @@ import { RouterLink } from '@angular/router';
       <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
           @for (link of links(); track link.href) {
-            <app-nav-link (linkClicked)="onLinkClicked($event)" [link]="link" />
+            <app-nav-link
+              [decoration]="getDecoration()"
+              (linkClicked)="onLinkClicked($event)"
+              [link]="link"
+            />
           }
         </ul>
       </div>
@@ -60,6 +69,7 @@ import { RouterLink } from '@angular/router';
 export class Navigation {
   current = signal('');
 
+  getDecoration = computed(() => (this.current() === 'Home' ? '*' : ''));
   onLinkClicked(path: string) {
     this.current.set(path);
   }

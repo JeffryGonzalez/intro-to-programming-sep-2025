@@ -18,12 +18,13 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       [routerLinkActiveOptions]="{ exact: true }"
       [routerLink]="link().href"
       (click)="linkClicked.emit(link().label)"
-      >{{ link().label }}</a
+      >{{ link().label }}{{ decoration() }}</a
     >
   `,
   styles: ``,
 })
 export class NavBarLink {
   link = input.required<NavLink>();
+  decoration = input<string>('');
   linkClicked = output<string>();
 }
