@@ -4,22 +4,25 @@ import {
   ChangeDetectionStrategy,
   signal,
   computed,
+  inject,
 } from '@angular/core';
+import { BankAccountStore } from '../services/bank-account-store';
 
 @Component({
   selector: 'app-demos-atm-withdraw',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CurrencyPipe],
+  providers: [BankAccountStore],
   template: `
     <p class="text-2xl font-bold">
-      Your Current Balance is {{ balance() | currency }}
+      Your Current Balance is {{ store.balance() | currency }}
     </p>
 
     <div class="flex gap-4">
-      @for (amount of amounts; track $index) {
+      @for (amount of store.amounts; track $index) {
         <button
-          [disabled]="amountLeft() - amount < 0"
-          (click)="addAmount(amount)"
+          [disabled]="store.amountLeft() - amount < 0"
+          (click)="store.addAmount(amount)"
           class="btn btn-success"
         >
           {{ amount }}
@@ -28,31 +31,27 @@ import {
     </div>
 
     <div>
-      <p>You want to withdraw: {{ plannedWithdrawal() | currency }}</p>
+      <p>You want to withdraw: {{ store.plannedWithdrawal() | currency }}</p>
     </div>
     <div>
-      @if (plannedWithdrawal() > 0) {
-        <button (click)="reset()" class="btn btn-warning">Cancel</button>
+      @if (store.plannedWithdrawal() > 0) {
+        <button (click)="store.reset()" class="btn btn-warning">Cancel</button>
+
+        @if (store.plannedWithdrawal() >= store.minimumWithdrawalAmount()) {
+          <button class="btn btn-success">
+            Make Withdrawal of {{ store.plannedWithdrawal() | currency }}
+          </button>
+        } @else {
+          <p>
+            This bank only allows withdrawals of
+            {{ store.minimumWithdrawalAmount() | currency }} or more.
+          </p>
+        }
       }
     </div>
   `,
   styles: ``,
 })
 export class AtmWithdraw {
-  // this will be fake, but play along.
-
-  readonly amounts = [10, 20, 50, 100] as const;
-  balance = signal(500);
-
-  plannedWithdrawal = signal(0);
-  amountLeft = computed(() => this.balance() - this.plannedWithdrawal());
-
-  reset() {
-    this.plannedWithdrawal.set(0);
-  }
-  addAmount(amount: number) {
-    this.plannedWithdrawal.update((oldAmount) => oldAmount + amount);
-    // or
-    //this.plannedWithdrawal.set(this.plannedWithdrawal() + amount);
-  }
+  store = inject(BankAccountStore); // the same as the constructor on our BankAccount(ICanCalculateBonuses )
 }
