@@ -1,25 +1,11 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AtmWithdraw } from '../component/atm-withdraw';
 
 @Component({
   selector: 'app-demos-signals',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [],
-  template: `<div>
-    <span class="text-2xl p-8">{{ strokes }}</span>
-    <span class="text-2xl p-8">{{ strokes }}</span>
-    <span class="text-2xl p-8">{{ strokes }}</span>
-    <span class="text-2xl p-8">{{ strokes }}</span>
-    <button (click)="takeASwing()" class="btn btn-success">Take A Shot</button>
-
-    <span class="text-2xl p-8">{{ strokes }}</span>
-    <span class="text-2xl p-8">{{ strokes }}</span>
-  </div>`,
+  imports: [AtmWithdraw],
+  template: ` <app-demos-atm-withdraw /> `,
   styles: ``,
 })
-export class Signals {
-  takeASwing() {
-    this.strokes++;
-  }
-
-  strokes = 0;
-}
+export class Signals {}
