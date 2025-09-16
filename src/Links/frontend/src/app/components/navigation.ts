@@ -3,10 +3,12 @@ import {
   ChangeDetectionStrategy,
   signal,
   computed,
+  inject,
 } from '@angular/core';
 import { NavLink } from './types';
 import { NavBarLink } from './nav-link';
 import { RouterLink } from '@angular/router';
+import { BankAccountStore } from '../../demos/services/bank-account-store';
 
 @Component({
   selector: 'app-navigation',
@@ -59,20 +61,29 @@ import { RouterLink } from '@angular/router';
         </ul>
       </div>
       <div class="navbar-end">
+        <span class="text-xs text-gray-500"
+          >Your balance is {{ accountStore.balance() }} and you want to do a
+          withdrawal of {{ accountStore.plannedWithdrawal() }}</span
+        >
         <span>(You are at {{ current() }})</span>
-        <a class="btn">Button</a>
+        <button (click)="doSomething()" class="btn">Button</button>
       </div>
     </div>
   `,
   styles: ``,
 })
 export class Navigation {
+  doSomething() {
+    console.log('They clicked that button!');
+  }
   current = signal('');
 
   getDecoration = computed(() => (this.current() === 'Home' ? '*' : ''));
-  onLinkClicked(path: string) {
-    this.current.set(path);
+  onLinkClicked(link: NavLink) {
+    this.current.set(link.label);
   }
+
+  accountStore = inject(BankAccountStore);
   links = signal<NavLink[]>([
     {
       href: '/',

@@ -5,6 +5,7 @@ import { BankAccountStore } from '../services/bank-account-store';
   selector: 'app-demo-bank-withdraw-amount-selector',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
+  providers: [],
   template: `
     <div class="join">
       @for (amount of store.amounts; track $index) {

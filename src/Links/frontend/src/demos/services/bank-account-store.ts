@@ -3,6 +3,7 @@ import {
   patchState,
   signalStore,
   withComputed,
+  withHooks,
   withMethods,
   withProps,
   withState,
@@ -39,4 +40,13 @@ export const BankAccountStore = signalStore(
   withProps(() => ({
     amounts: WITHDRAWAL_AMOUNTS,
   })),
+  withHooks({
+    onInit() {
+      // maybe go to the API and get THIS user's balance?
+      console.log('Just created an instance of the BankAccountStore');
+    },
+    onDestroy() {
+      console.log('Destroying an instance of the BankAccountStore');
+    },
+  }),
 );

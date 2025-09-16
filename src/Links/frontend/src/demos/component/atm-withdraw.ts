@@ -12,7 +12,7 @@ import { BankWithdrawTransactionActions } from '../components/bank-withdraw-tran
     BankWithdrawAmountSelector,
     BankWithdrawTransactionActions,
   ],
-  providers: [BankAccountStore],
+  providers: [],
   template: `
     <p class="text-2xl font-bold">
       Your Current Balance is {{ store.balance() | currency }}

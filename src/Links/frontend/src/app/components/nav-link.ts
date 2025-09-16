@@ -17,7 +17,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
       [routerLinkActive]="['font-bold', 'text-accent']"
       [routerLinkActiveOptions]="{ exact: true }"
       [routerLink]="link().href"
-      (click)="linkClicked.emit(link().label)"
+      (click)="linkClicked.emit(link())"
       >{{ link().label }}{{ decoration() }}</a
     >
   `,
@@ -26,5 +26,5 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 export class NavBarLink {
   link = input.required<NavLink>();
   decoration = input<string>('');
-  linkClicked = output<string>();
+  linkClicked = output<NavLink>();
 }
