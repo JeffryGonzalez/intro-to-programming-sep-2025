@@ -32,7 +32,10 @@ import { RouterLink } from '@angular/router';
             class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             @for (link of links(); track link.href) {
-              <app-nav-link [link]="link" />
+              <app-nav-link
+                (linkClicked)="onLinkClicked($event)"
+                [link]="link"
+              />
             }
           </ul>
         </div>
@@ -42,11 +45,12 @@ import { RouterLink } from '@angular/router';
       <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal px-1">
           @for (link of links(); track link.href) {
-            <app-nav-link [link]="link" />
+            <app-nav-link (linkClicked)="onLinkClicked($event)" [link]="link" />
           }
         </ul>
       </div>
       <div class="navbar-end">
+        <span>(You are at {{ current() }})</span>
         <a class="btn">Button</a>
       </div>
     </div>
@@ -54,9 +58,11 @@ import { RouterLink } from '@angular/router';
   styles: ``,
 })
 export class Navigation {
-  demo = signal({
-    pizza: 'yummy',
-  });
+  current = signal('');
+
+  onLinkClicked(path: string) {
+    this.current.set(path);
+  }
   links = signal<NavLink[]>([
     {
       href: '/',
