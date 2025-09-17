@@ -10,15 +10,13 @@ namespace Links.Api.Links;
 
 public class LinksController(IDocumentSession session) : ControllerBase
 {
-    // "Flag - a "Marker" on this method, that the API will read and know this is where
-    // POSTs to "/links" should be directed.
 
-    //private IDocumentSession session;
-
-    //public LinksController(IDocumentSession session)
-    //{
-    //    this.session = session;
-    //}
+    [HttpGet("/links")]
+    public async Task<ActionResult> GetAllLinksAsync()
+    {
+        var response = await session.Query<CreateLinkResponse>().ToListAsync();
+        return Ok(response);
+    }
 
     [HttpPost("/links")]
     public async Task<ActionResult> AddALink(
