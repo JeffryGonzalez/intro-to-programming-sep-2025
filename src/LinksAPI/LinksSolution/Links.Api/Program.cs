@@ -5,7 +5,20 @@ using Marten;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// This is CLASSROOM CODE
+// do not copy and paste this into production code - check with your local experts on what they want.
 
+builder.Services.AddCors(c =>
+{
+    c.AddDefaultPolicy(pol =>
+    {
+      
+        pol.AllowAnyOrigin();
+        pol.AllowAnyMethod();
+        pol.AllowAnyHeader();
+        // "promiscuous mode"
+    });
+});
 var connectionString = builder.Configuration.GetConnectionString("links") 
     ?? throw new Exception("You Need a Connection String!");
 Console.WriteLine("Using This Connection String " + connectionString);
@@ -40,7 +53,7 @@ app.UseAuthorization();
 app.MapControllers(); // Create a "phone book" of possible things this API can expect.
 // For example, when someone does a POST to "/links", create the LinksController and call the AddLink method.
 // Route Table.
-
+app.UseCors();
 app.Run(); // This is where our API will be up and running, listening for requests.
 // This is basically a while(true) {...} loop that will run "forever"
 
