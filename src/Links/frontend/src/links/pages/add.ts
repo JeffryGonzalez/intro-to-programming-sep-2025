@@ -69,9 +69,15 @@ export class Add {
     }),
   });
 
-  addLink() {
+  async addLink() {
     if (this.form.valid) {
-      console.log('Send this to the server, yo:', this.form.value);
+      await fetch('http://localhost:1337/links', {
+        method: 'POST',
+        body: JSON.stringify(this.form.value),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
     } else {
       console.warn('The form is not valid - whatcha going to do?');
     }
