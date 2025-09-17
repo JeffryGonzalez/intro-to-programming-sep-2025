@@ -30,7 +30,8 @@ public class LinksController(IDocumentSession session) : ControllerBase
             Href = request.Href,
             Description = request.Description,
             AddedBy = "joe@aol.com",
-            Created = DateTimeOffset.Now
+            Created = DateTimeOffset.Now,
+            Title = request.Title,
         };
         session.Store(response);
         await session.SaveChangesAsync(); 
@@ -68,16 +69,10 @@ public record CreateLinkRequest
 {
     public string Href { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
+    public string Title { get; set;} = string.Empty;
 
 }
 
-/*{
-  "id": "38983989839839839893",
-  "href": "https://typescriptlang.org",
-  "description": "The TypeScript Website",
-  "addedBy": "jeff@hypertheory.com",
-  "created": "some datetime"
-}*/
 
 
 public record CreateLinkResponse
@@ -88,4 +83,5 @@ public record CreateLinkResponse
     public string Description { get; set; } = string.Empty;
     public string AddedBy { get; set; } = string.Empty;
     public DateTimeOffset Created { get; set; }
+    public string Title { get; set; } = string.Empty;
 }
