@@ -1,4 +1,5 @@
 // This is compiling to an INTERNAL class called Program without a Namespace, and it has a method called "Main"
+using Links.Api.Links;
 using Marten;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,11 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("links") 
     ?? throw new Exception("You Need a Connection String!");
 Console.WriteLine("Using This Connection String " + connectionString);
+
+// Singleton in this use means create one of these the first time anyone needs it
+// and then reuse the same instance for all of eternity (until the app shuts down)
+// Scoped means this will be create new for each request, and reused, if needed, during that request.
+builder.Services.AddScoped<IManagerUserIdentity, JwtUserIdentityManager>();
 builder.Services.AddMarten(config =>
 {
-   
+
     config.Connection(connectionString);
-});
+}).UseLightweightSessions();
+
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

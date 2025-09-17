@@ -84,6 +84,7 @@ export class Navigation {
   }
 
   accountStore = inject(BankAccountStore);
+
   links = signal<NavLink[]>([
     {
       href: '/',

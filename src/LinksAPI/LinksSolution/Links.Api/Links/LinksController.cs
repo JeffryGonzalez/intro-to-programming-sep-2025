@@ -10,7 +10,7 @@ namespace Links.Api.Links;
 // When a POST comes in for "/links", create a instance of this class, oh Kestral Web Server
 
 [ApiController]
-public class LinksController(IDocumentSession session) : ControllerBase
+public class LinksController(IDocumentSession session, IManagerUserIdentity userIdentityManager) : ControllerBase
 {
 
     [HttpGet("/links")]
@@ -25,13 +25,13 @@ public class LinksController(IDocumentSession session) : ControllerBase
         [FromBody] CreateLinkRequest request
         )
     {
-
+        string userSubject = await userIdentityManager.GetSubjectAsync();
 
         var response = new CreateLinkResponse {
             Id = Guid.NewGuid(),
             Href = request.Href,
             Description = request.Description,
-            AddedBy = "joe@aol.com",
+            AddedBy = userSubject,
             Created = DateTimeOffset.Now,
             Title = request.Title,
         };
@@ -69,7 +69,7 @@ public class LinksController(IDocumentSession session) : ControllerBase
 
 public record CreateLinkRequest
 {
-    [Required]
+    [Required] // "Declarative Programming"
     public string Href { get; set; } = string.Empty;
     [Required]
     public string Description { get; set; } = string.Empty;
