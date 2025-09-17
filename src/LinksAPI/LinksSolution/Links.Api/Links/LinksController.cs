@@ -1,5 +1,6 @@
 ﻿
 
+using System.ComponentModel.DataAnnotations;
 using Marten;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace Links.Api.Links;
 
 // When a POST comes in for "/links", create a instance of this class, oh Kestral Web Server
 
+[ApiController]
 public class LinksController(IDocumentSession session) : ControllerBase
 {
 
@@ -23,6 +25,8 @@ public class LinksController(IDocumentSession session) : ControllerBase
         [FromBody] CreateLinkRequest request
         )
     {
+
+
         var response = new CreateLinkResponse {
             Id = Guid.NewGuid(),
             Href = request.Href,
@@ -65,8 +69,11 @@ public class LinksController(IDocumentSession session) : ControllerBase
 
 public record CreateLinkRequest
 {
+    [Required]
     public string Href { get; set; } = string.Empty;
+    [Required]
     public string Description { get; set; } = string.Empty;
+    [Required, MaxLength(100)]
     public string Title { get; set;} = string.Empty;
 
 }
