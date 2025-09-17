@@ -26,7 +26,7 @@ export const BankAccountStore = signalStore(
   withMethods((store) => {
     return {
       reset: () => patchState(store, { plannedWithdrawal: 0 }),
-      addAmount: (amount: WithdrawalAmount) =>
+      addWithdrawalAmount: (amount: WithdrawalAmount) =>
         patchState(store, {
           plannedWithdrawal: store.plannedWithdrawal() + amount,
         }),

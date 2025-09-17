@@ -1,6 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { BankAccountStore } from '../services/bank-account-store';
+import { BankAccountStore } from '../../shared/services/bank-account-store';
 import { BankWithdrawAmountSelector } from '../components/bank-withdraw-amount-selector';
 import { BankWithdrawTransactionActions } from '../components/bank-withdraw-transaction-actions';
 

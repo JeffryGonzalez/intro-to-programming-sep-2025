@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
-import { BankAccountStore } from '../services/bank-account-store';
+import { BankAccountStore } from '../../shared/services/bank-account-store';
 import { CurrencyPipe } from '@angular/common';
 
 @Component({
