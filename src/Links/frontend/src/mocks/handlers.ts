@@ -1,3 +1,3 @@
-import { WELCOME_HANDLERS } from './welcome-handlers';
+import { LinksApiTestDoubles } from './links-handler';
 
-export const handlers = [...WELCOME_HANDLERS];
+export const handlers = [...LinksApiTestDoubles];
