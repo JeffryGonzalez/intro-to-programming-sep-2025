@@ -16,7 +16,7 @@ public class LinksController(IDocumentSession session, IManagerUserIdentity user
     // GET /links
     // GET /link?sortOrder=NewestFirst
     [HttpGet("/links")]
-    public async Task<ActionResult> GetAllLinksAsync([FromQuery] string sortOrder = "OldestFirst")
+    public async Task<ActionResult<IReadOnlyList<CreateLinkResponse>>> GetAllLinksAsync([FromQuery] string sortOrder = "OldestFirst")
     {
         var response = session.Query<CreateLinkResponse>();
 
@@ -31,7 +31,7 @@ public class LinksController(IDocumentSession session, IManagerUserIdentity user
     }
 
     [HttpPost("/links")]
-    public async Task<ActionResult> AddALink(
+    public async Task<ActionResult<CreateLinkResponse>> AddALink(
         [FromBody] CreateLinkRequest request
         )
     {
@@ -53,7 +53,7 @@ public class LinksController(IDocumentSession session, IManagerUserIdentity user
 
     // If we get a GET request to /links/{guid} THEN create this controller and run this method, if isn't, don't bother me, just return 404
     [HttpGet("/links/{postId:guid}")]
-    public async Task<ActionResult> GetLinkById(Guid postId)
+    public async Task<ActionResult<CreateLinkResponse>> GetLinkById(Guid postId)
     {
        var savedLink = await session.Query<CreateLinkResponse>().
             SingleOrDefaultAsync(x => x.Id == postId);
