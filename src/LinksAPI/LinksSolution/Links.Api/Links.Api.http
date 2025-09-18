@@ -13,6 +13,6 @@ Authorization: bearer SOME_VALUE_YOU_GET_FROM_ANOTHER_SERVICE
 
 ###
 
-GET http://localhost:1337/links
+GET http://localhost:1337/links?sortOrder=NewestFirst
 Accept: application/json 
 

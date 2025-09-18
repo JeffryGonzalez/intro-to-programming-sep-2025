@@ -42,11 +42,38 @@ import {
           placeholder=""
         ></textarea>
         <p class="label">required</p>
+        @let descriptionInput = form.controls.description;
+        @if (
+          descriptionInput.errors &&
+          (descriptionInput.touched || descriptionInput.dirty)
+        ) {
+          <div class="alert alert-error">
+            <p>This field has some errors!</p>
+            @if (descriptionInput.hasError('required')) {
+              <p>This is required</p>
+            }
+            @if (descriptionInput.hasError('maxlength')) {
+              <p>This is too darned long.</p>
+            }
+          </div>
+        }
       </fieldset>
       <fieldset class="fieldset">
         <legend class="fieldset-legend">The Link</legend>
         <input formControlName="href" type="url" class="input" placeholder="" />
         <p class="label">required</p>
+        @let urlInput = form.controls.href;
+        @if (urlInput.errors && (urlInput.touched || urlInput.dirty)) {
+          <div class="alert alert-error">
+            <p>This field has some errors!</p>
+            @if (urlInput.hasError('required')) {
+              <p>This is required</p>
+            }
+            @if (urlInput.hasError('maxlength')) {
+              <p>This is too darned long.</p>
+            }
+          </div>
+        }
       </fieldset>
       <button class="btn btn-primary" type="submit">Add This Link</button>
     </form>
@@ -78,8 +105,9 @@ export class Add {
           'Content-Type': 'application/json',
         },
       });
+      this.form.reset();
     } else {
-      console.warn('The form is not valid - whatcha going to do?');
+      this.form.markAllAsTouched();
     }
   }
 }

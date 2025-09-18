@@ -3,6 +3,7 @@
 using System.ComponentModel.DataAnnotations;
 using Marten;
 using Microsoft.AspNetCore.Mvc;
+using Weasel.Postgresql.Tables;
 
 namespace Links.Api.Links;
 
@@ -12,12 +13,21 @@ namespace Links.Api.Links;
 [ApiController]
 public class LinksController(IDocumentSession session, IManagerUserIdentity userIdentityManager) : ControllerBase
 {
-
+    // GET /links
+    // GET /link?sortOrder=NewestFirst
     [HttpGet("/links")]
-    public async Task<ActionResult> GetAllLinksAsync()
+    public async Task<ActionResult> GetAllLinksAsync([FromQuery] string sortOrder = "OldestFirst")
     {
-        var response = await session.Query<CreateLinkResponse>().ToListAsync();
-        return Ok(response);
+        var response = session.Query<CreateLinkResponse>();
+
+        if(sortOrder == "NewestFirst")
+        {
+            response.OrderByDescending(link => link.Created);
+        }
+
+           var results = await response.ToListAsync();
+        //await Task.Delay(3000);
+        return Ok(results);
     }
 
     [HttpPost("/links")]
@@ -36,7 +46,8 @@ public class LinksController(IDocumentSession session, IManagerUserIdentity user
             Title = request.Title,
         };
         session.Store(response);
-        await session.SaveChangesAsync(); 
+        await session.SaveChangesAsync();
+    
         return Created($"/links/{response.Id}", response);
     }
 
