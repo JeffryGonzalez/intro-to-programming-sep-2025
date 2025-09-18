@@ -1,4 +1,4 @@
-import { http, HttpResponse, delay } from 'msw';
+import { http, HttpResponse, delay, passthrough } from 'msw';
 
 const FAKE_LINKS = [
   {
@@ -22,7 +22,6 @@ const FAKE_LINKS = [
 export const LinksApiTestDoubles = [
   http.get('http://localhost:1337/links', async () => {
     await delay(3000); // 100-200ms (simulate a "normal" network latency)
-    // return HttpResponse.json([]);
-    return HttpResponse.json(FAKE_LINKS);
+    return passthrough();
   }),
 ];
