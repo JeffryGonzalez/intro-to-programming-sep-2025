@@ -32,7 +32,7 @@ import {
         </button>
       </div>
       <ul>
-        @for (link of linksResource.value(); track link.id) {
+        @for (link of sortedLinks(); track link.id) {
           <li class="card bg-base-100 card-xl shadow-sm pb-4">
             <div class="card-body">
               <h2 class="card-title">{{ link.title }}</h2>
@@ -67,5 +67,17 @@ export class List {
     loader: () => fetch('http://localhost:1337/links').then((r) => r.json()),
   });
 
-  sortedLinks = computed(() => {});
+  sortedLinks = computed(() => {
+    const sortOption = this.sortOption();
+    const links = this.linksResource.value() || [];
+    return [...links].sort((a, b) => {
+      const dateA = new Date(a.created).getTime();
+      const dateB = new Date(b.created).getTime();
+      if (sortOption === 'newestFirst') {
+        return dateB - dateA;
+      } else {
+        return dateA - dateB;
+      }
+    });
+  });
 }
