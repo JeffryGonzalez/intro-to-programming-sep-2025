@@ -22,10 +22,10 @@ public class LinksController(IDocumentSession session, IManagerUserIdentity user
 
         if(sortOrder == "NewestFirst")
         {
-            response.OrderByDescending(link => link.Created);
+            response = (Marten.Linq.IMartenQueryable<CreateLinkResponse>)response.OrderByDescending(link => link.Created);
         }
 
-           var results = await response.ToListAsync();
+        var results = await response.ToListAsync();
         //await Task.Delay(3000);
         return Ok(results);
     }
