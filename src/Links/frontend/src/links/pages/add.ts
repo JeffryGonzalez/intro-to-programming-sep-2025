@@ -1,10 +1,11 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { LinkCreateModel, LinksStore } from '../services/links-store';
 @Component({
   selector: 'app-links-add',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -95,16 +96,10 @@ export class Add {
       validators: [Validators.required],
     }),
   });
-
+  store = inject(LinksStore);
   async addLink() {
     if (this.form.valid) {
-      await fetch('http://localhost:1337/links', {
-        method: 'POST',
-        body: JSON.stringify(this.form.value),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      await this.store.addLink(this.form.value as LinkCreateModel);
       this.form.reset();
     } else {
       this.form.markAllAsTouched();

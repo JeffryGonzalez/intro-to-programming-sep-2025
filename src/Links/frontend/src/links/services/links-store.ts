@@ -7,8 +7,17 @@ import {
   withState,
 } from '@ngrx/signals';
 import { LinkListItemModel } from '../types';
-import { withEntities, setAllEntities } from '@ngrx/signals/entities';
+import {
+  withEntities,
+  setAllEntities,
+  addEntity,
+} from '@ngrx/signals/entities';
 import { computed } from '@angular/core';
+export type LinkCreateModel = Pick<
+  LinkListItemModel,
+  'title' | 'description' | 'href'
+>;
+
 type SortOptions = 'newestFirst' | 'oldestFirst';
 type LinksState = {
   sortOption: SortOptions;
@@ -22,9 +31,23 @@ export const LinksStore = signalStore(
   withEntities<LinkListItemModel>(),
   withMethods((store) => {
     return {
+      addLink: async (model: LinkCreateModel) => {
+        await fetch('http://localhost:1337/links', {
+          method: 'POST',
+          body: JSON.stringify(model),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((r) => r.json())
+          .then((r) => {
+            const newItem = r as LinkListItemModel;
+            patchState(store, addEntity(newItem));
+          });
+      },
       setSortOption: (sortOption: SortOptions) =>
         patchState(store, { sortOption }),
-      _load: async () => {
+      load: async () => {
         patchState(store, { _apiState: 'fetching' });
         await fetch('http://localhost:1337/links')
           .then((r) => r.json())
@@ -56,7 +79,7 @@ export const LinksStore = signalStore(
   withHooks({
     // things the devloper this added that will be run at specific times in the life of this thing.
     onInit(store) {
-      store._load();
+      store.load();
     },
   }),
 );
