@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oncall-developer-api
+  namespace: hypertheory
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oncall-developer-api
+  template:
+    metadata:
+      labels:
+        app: oncall-developer-api
+    spec:
+
+      containers:
+      - name: oncall-developer-api
+        image: jeffrygonzalez/oncall-sep-2025:v2
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080

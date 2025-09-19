@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: oncall-developer-api-service-ingress
+  labels:
+    app.kubernetes.io/name: oncall-developer-api-service-ingress
+spec:
+  rules:
+  - host: class.hypertheory-labs.com
+    https:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: oncall-developer-api-service
+            port: 
+              number: 443
