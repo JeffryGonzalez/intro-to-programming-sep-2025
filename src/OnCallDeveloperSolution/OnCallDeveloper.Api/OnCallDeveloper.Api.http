@@ -1,0 +1,7 @@
+@OnCallDeveloper.Api_HostAddress = http://localhost:5082
+
+
+GET {{OnCallDeveloper.Api_HostAddress}}/oncalldeveloper
+Accept: application/json
+
+###
